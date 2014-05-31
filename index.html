@@ -20,7 +20,6 @@ map.addLayer(googleLayer);
 $.getJSON('geodata/tracts2010.json', function(data) {
   console.log(data);
 });
-}
 $('#filters').on('change', function() {
   var census_var = this.value;
   console.log(this.value);
