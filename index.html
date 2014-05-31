@@ -28,7 +28,7 @@ var googleLayer = new L.Google('ROADMAP');
 map.addLayer(googleLayer);
 $.getJSON('geodata/tracts2010.json', function(data) {
   // console.log(data);
-  // debugger;
+  debugger;
   data = topojson.feature(data, data.objects.tracts2010);
   data.addTo(map);
   // L.GeoJSON(
