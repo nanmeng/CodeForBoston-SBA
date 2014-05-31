@@ -1,19 +1,22 @@
 <head>
 <title>Leaflet</title>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.css" />
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
 <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
 <script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
 </head>
 <body>
 <select id="filters">
   <option value="B19326_002E">Median income in the past 12 months (in 2012 inflation-adjusted dollars) Male Total (dollars)</option>
-  <option value="B05006">Country of Birth (non-US)</option>
-  <option value="B19001">Household Income</option>
-  <option value="B08301">Means of Transportation to Work</option>
+  <option value="B05006_158E">Born in Northern America</option>
+  <option value="B05006_146E">Born in South America</option>
+  <option value="B05006_099E">Born in Northern Africa</option>
+  <option value="B05006_021E">Born in Southern Europe</option>
+  <option value="B19301_001E">Income per capita</option>
   <option value="B14007H_018E">Enrolled in Graduate School</option>
   <option value="B14007H_017E">Enrolled in College</option>
+  <option value="B06002_001E">Median age by place of birth in US</option>
 </select>
 <div style="width:500px; height:500px" id="map"></div>
 <script type='text/javascript'>
