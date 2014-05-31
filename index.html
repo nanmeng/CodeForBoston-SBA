@@ -8,7 +8,7 @@
 </head>
 <body>
 <select id="filters">
-  <option value="value1">Name1</option>
+  <option value="B19326_002E">Median income in the past 12 months (in 2012 inflation-adjusted dollars) Male Total (dollars)</option>
   <option value="value2">Name2</option>
 </select>
 <div style="width:500px; height:500px" id="map"></div>
@@ -18,7 +18,20 @@ var map = new L.Map('map', {center: new L.LatLng(42.3334, -71.0270), zoom: 9});
 var googleLayer = new L.Google('ROADMAP');
 map.addLayer(googleLayer);
 $('#filters').on('change', function() {
+  var census_var = this.value;
   console.log(this.value);
-})
+  $.get({
+    url: 'http://api.census.gov/data/2012/acs5',
+    data: {
+      'for': 'tract:*',
+      'in': 'state:25+county:*',
+      'key': '2b4b319d9a6ffbcfa81e15e94da52aa46bd901ec',
+      'get': this.value
+    },
+    dataType: 'json',
+    success: funciton(data) {
+      console.log(data);
+    });
+});
 </script>
 </body>
