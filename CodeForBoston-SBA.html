@@ -1,13 +1,15 @@
 <head>
-  <title>CodeForBoston-SBA</title>
+<title>Leaflet</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
+<script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+<script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
 </head>
-
 <body>
-  {{> hello}}
+<div style="width:500px; height:500px" id="map"></div>
+<script type='text/javascript'>
+var map = new L.Map('map', {center: new L.LatLng(51.51, -0.11), zoom: 9});
+var googleLayer = new L.Google('ROADMAP');
+map.addLayer(googleLayer);
+</script>
 </body>
-
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
-</template>
