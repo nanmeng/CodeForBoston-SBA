@@ -17,6 +17,19 @@
 </select>
 <div style="width:500px; height:500px" id="map"></div>
 <script type='text/javascript'>
+L.TopoJSON = L.GeoJSON.extend({
+  addData: function(jsonData) {    
+    if (jsonData.type === "Topology") {
+      for (key in jsonData.objects) {
+        geojson = topojson.feature(jsonData, jsonData.objects[key]);
+        L.GeoJSON.prototype.addData.call(this, geojson);
+      }
+    }    
+    else {
+      L.GeoJSON.prototype.addData.call(this, jsonData);
+    }
+  }  
+});
 // var map = new L.Map('map', {center: new L.LatLng(51.51, -0.11), zoom: 9});
 var map = new L.Map('map', {center: new L.LatLng(42.3334, -71.0270), zoom: 9});
 var googleLayer = new L.Google('ROADMAP');
