@@ -17,6 +17,10 @@
 var map = new L.Map('map', {center: new L.LatLng(42.3334, -71.0270), zoom: 9});
 var googleLayer = new L.Google('ROADMAP');
 map.addLayer(googleLayer);
+$.getJSON('private/tracts2010.json', funciton(data) {
+  console.log(data);
+});
+}
 $('#filters').on('change', function() {
   var census_var = this.value;
   console.log(this.value);
