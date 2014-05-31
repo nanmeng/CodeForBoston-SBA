@@ -18,7 +18,7 @@ var map = new L.Map('map', {center: new L.LatLng(42.3334, -71.0270), zoom: 9});
 var googleLayer = new L.Google('ROADMAP');
 map.addLayer(googleLayer);
 $('#filters').on('change', function() {
-  console.log(this);
+  console.log(this.value);
 })
 </script>
 </body>
