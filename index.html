@@ -20,7 +20,7 @@ map.addLayer(googleLayer);
 $('#filters').on('change', function() {
   var census_var = this.value;
   console.log(this.value);
-  $.get({
+  $.ajax({
     url: 'http://api.census.gov/data/2012/acs5',
     data: {
       'for': 'tract:*',
@@ -31,7 +31,8 @@ $('#filters').on('change', function() {
     dataType: 'json',
     success: function(data) {
       console.log(data);
-    });
+    }
+  );
 });
 </script>
 </body>
