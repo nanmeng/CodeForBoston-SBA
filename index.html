@@ -81,6 +81,7 @@ $.getJSON('geodata/tracts2010.json', function(data) {
       });
       // Create a mouseout event that undoes the mouseover changes
       layer.on("mouseout", function (e) {
+        var tract_id = e.target.feature.id;
         // Start by reverting the style back
         layer.setStyle(defaultStyle); 
         // And then destroying the popup
