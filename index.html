@@ -8,6 +8,7 @@
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 </head>
 <body>
+<input id="location" value="">
 <select id="filters">
   <option value="B19326_002E">Median income in the past 12 months (in 2012 inflation-adjusted dollars) Male Total (dollars)</option>
   <option value="B05006_158E">Born in Northern America</option>
@@ -170,5 +171,21 @@ $('#business').on('change', function(e) {
     url: 'http://data.cityofboston.gov/resource/'
   })
 })
+$('#location').on('keyup', function(e) {
+  if(e.which === 13){
+    $.ajax({
+    url: 'http://www.mapquestapi.com/geocoding/v1/address',
+    data: {
+      'key': 'Fmjtd%7Cluur2g62nq%2C8x%3Do5-9a85q4',
+      'location': $('#location').val()
+    },
+    dataType: 'json',
+    success: function(data) {
+      debugger;
+      // shift away the header
+    }
+  });
+  }
+});
 </script>
 </body>
