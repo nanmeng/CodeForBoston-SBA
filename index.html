@@ -22,15 +22,31 @@
 </select>
 <div style="width:500px; height:500px" id="map"></div>
 <script type='text/javascript'>
+var map = new L.Map('map').setView([42.3334, -71.0270], 13);
+var mapQuest = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
+  attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+  subdomains: '1234'
+}).addTo(map);
 // var map = new L.Map('map', {center: new L.LatLng(51.51, -0.11), zoom: 9});
+/*
 var map = new L.Map('map', {center: new L.LatLng(42.3334, -71.0270), zoom: 9});
 var googleLayer = new L.Google('ROADMAP');
 map.addLayer(googleLayer);
+*/
 $.getJSON('geodata/tracts2010.json', function(data) {
   // console.log(data);
-  debugger;
   data = topojson.feature(data, data.objects.tracts2010);
-  L.control.layers(data).addTo(map);
+  // L.control.layers(data).addTo(map);
+  
+  var baseLayers = {
+    "Map Quest": mapQuest
+  };
+  
+  var overlays = {
+      "2010 Tracts": tracts2010
+  };
+  
+  L.control.layers(baseLayers, overlays).addTo(map);
   // L.GeoJSON(
 });
 $('#filters').on('change', function() {
