@@ -20,10 +20,17 @@
   <option value="B14007H_017E">Enrolled in College</option>
   <option value="B06002_001E">Median age by place of birth in US</option>
 </select>
+<select id="business">
+  <option value="gb6y-34cq">Active Food Establishment Licenses</option>
+  <option value="e29s-ympv">Boston Public Schools</option>
+</select>
 <div style="width:100%; height:100%" id="map"></div>
 <script type='text/javascript'>
 var select_filter = '';
 var map = new L.Map('map').setView([42.3334, -71.0270], 13);
+map.on('move', funciton() {
+  debugger;
+  });
 var mapQuest = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
   attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
   subdomains: '1234'
@@ -135,5 +142,12 @@ $('#filters').on('change', function(e) {
     }
   });
 });
+$('#business').on('change', function(e) {
+  debugger;
+  var data_var = this.value;
+  $.ajax({
+    url: 'http://data.cityofboston.gov/resource/'
+  })
+})
 </script>
 </body>
