@@ -34,7 +34,7 @@ map.on('moveend', function() {
   $.ajax({
     url: 'http://data.cityofboston.gov/resource/' + data_id + '.json',
     data: {
-      'where': 'within_circle(location,' + map_center.lat + ',' + map_center.lng + ',5000)'
+      '$where': 'within_circle(location,' + map_center.lat + ',' + map_center.lng + ',5000)'
     },
     dataType: 'json',
     success: function(data) {
