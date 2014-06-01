@@ -55,11 +55,12 @@ $.getJSON('geodata/tracts2010.json', function(data) {
       // Create a mouseover event
       layer.on("mouseover", function (e) {
         debugger;
+        var tract_id = e.target.feature.id;
         // Change the style to the highlighted version
         layer.setStyle(highlightStyle);
         // Create a popup with a unique ID linked to this record
         var popup = $("<div></div>", {
-            id: "popup-" + properties.DISTRICT,
+            id: "popup-" + tract_id,
             css: {
                 position: "absolute",
                 bottom: "85px",
@@ -72,7 +73,7 @@ $.getJSON('geodata/tracts2010.json', function(data) {
         });
         // Insert a headline into that popup
         var hed = $("<div></div>", {
-            text: "District " + properties.DISTRICT + ": " + properties.REPRESENTATIVE,
+            text: "Tract ID: " + tract_id + " value: " + census_data[tract_id],
             css: {fontSize: "16px", marginBottom: "3px"}
         }).appendTo(popup);
         // Add the popup to the map
@@ -83,7 +84,7 @@ $.getJSON('geodata/tracts2010.json', function(data) {
         // Start by reverting the style back
         layer.setStyle(defaultStyle); 
         // And then destroying the popup
-        $("#popup-" + properties.DISTRICT).remove();
+        $("#popup-" + tract_id).remove();
       });
       // Close the "anonymous" wrapper function, and call it while passing
       // in the variables necessary to make the events work the way we want.
