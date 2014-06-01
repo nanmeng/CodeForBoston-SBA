@@ -22,6 +22,7 @@
 </select>
 <div style="width:100%; height:100%" id="map"></div>
 <script type='text/javascript'>
+var select_filter = '';
 var map = new L.Map('map').setView([42.3334, -71.0270], 13);
 var mapQuest = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
   attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
@@ -109,7 +110,8 @@ $.getJSON('geodata/tracts2010.json', function(data) {
   // L.GeoJSON(
 });
 var census_data = {};
-$('#filters').on('change', function() {
+$('#filters').on('change', function(e) {
+  debugger;
   var census_var = this.value;
   console.log(this.value);
   $.ajax({
