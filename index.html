@@ -38,10 +38,10 @@ map.on('moveend', function() {
     },
     dataType: 'json',
     success: function(data) {
-      debugger;
       for (var i = 0; i < data.length; i++) {
         var location = [data[i].location.latitude, data[i].location.longitude];
         var popup = '';
+        debugger;
         for (var k in data[i]) {
           if (data[i].hasOwnProperty(k)) {
             popup += k + ': ' + data[i][k] + '<br/>';
