@@ -106,6 +106,7 @@ $.getJSON('geodata/tracts2010.json', function(data) {
   L.control.layers(baseLayers, overlays).addTo(map);
   // L.GeoJSON(
 });
+var census_data = {};
 $('#filters').on('change', function() {
   var census_var = this.value;
   console.log(this.value);
@@ -119,7 +120,8 @@ $('#filters').on('change', function() {
     },
     dataType: 'json',
     success: function(data) {
-      console.log(data);
+      debugger;
+      census_data = data;
     }
   });
 });
