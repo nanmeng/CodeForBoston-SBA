@@ -42,7 +42,7 @@ map.on('moveend', function() {
       for (var i = 0; i < data.length; i++) {
         var location = [data[i].location.latitude, data[i].location.longitude];
         var popup = '';
-        debugger;
+        // debugger;
         for (var k in data[i]) {
           if (data[i].hasOwnProperty(k)) {
             popup += k + ': ' + data[i][k] + '<br/>';
@@ -79,12 +79,12 @@ $.getJSON('geodata/tracts2010.json', function(data) {
       fillOpacity: 0.65,
       fillColor: '#2262CC'
     };
-    console.log('onEachFeature');
+    // console.log('onEachFeature');
     (function(layer, properties) {
-      console.log('properties', properties);
+      // console.log('properties', properties);
       // Create a mouseover event
       layer.on("mouseover", function (e) {
-        debugger;
+        // debugger;
         var tract_id = e.target.feature.id;
         // Change the style to the highlighted version
         layer.setStyle(highlightStyle);
@@ -140,7 +140,7 @@ $.getJSON('geodata/tracts2010.json', function(data) {
 });
 var census_data = {};
 $('#filters').on('change', function(e) {
-  debugger;
+  // debugger;
   var census_var = this.value;
   // console.log(this.value);
   $.ajax({
@@ -153,7 +153,7 @@ $('#filters').on('change', function(e) {
     },
     dataType: 'json',
     success: function(data) {
-      debugger;
+      // debugger;
       // shift away the header
       data.shift();
       for (var i = 0; i < data.length; i++) {
@@ -165,7 +165,7 @@ $('#filters').on('change', function(e) {
   });
 });
 $('#business').on('change', function(e) {
-  debugger;
+  // debugger;
   var data_var = this.value;
   $.ajax({
     url: 'http://data.cityofboston.gov/resource/'
@@ -178,7 +178,7 @@ $('#location').on('keyup', function(e) {
     data: 'key=Fmjtd%7Cluur2g62nq%2C8x%3Do5-9a85q4&location=' + $('#location').val(),
     dataType: 'json',
     success: function(data) {
-      debugger;
+      // debugger;
       var location = data.results[0].locations[0].latLng;
       map.setView([location.lat, location.lng]);
       // shift away the header
