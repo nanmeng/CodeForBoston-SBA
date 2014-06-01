@@ -39,12 +39,15 @@ map.on('moveend', function() {
     dataType: 'json',
     success: function(data) {
       debugger;
-      // shift away the header
-      data.shift();
       for (var i = 0; i < data.length; i++) {
-        var tract_id = '' + data[i][1] + data[i][2] + data[i][3];
-        // console.log('tract_id', tract_id);
-        census_data[tract_id] = data[i][0];
+        var location = [data[i].location.latitude, data[i].location.longitude];
+        var popup = '';
+        for (var k in data) {
+          if (data.hasOwnProperty(k)) {
+            popup += k + ': ' + data[k] + '<br/>';
+          }
+        }
+        var marker = L.marker(location).addTo(map).bindPopup(popup);
       }
     }
   });
