@@ -175,7 +175,7 @@ $('#location').on('keyup', function(e) {
   if(e.which === 13){
     $.ajax({
     url: 'http://www.mapquestapi.com/geocoding/v1/address',
-    data: 'key=Fmjtd%7Cluur2g62nq%2C8x%3Do5-9a85q4&location'': ' + $('#location').val(),
+    data: 'key=Fmjtd%7Cluur2g62nq%2C8x%3Do5-9a85q4&location=' + $('#location').val(),
     dataType: 'json',
     success: function(data) {
       debugger;
