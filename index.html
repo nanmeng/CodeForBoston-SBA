@@ -51,10 +51,10 @@ $.getJSON('geodata/tracts2010.json', function(data) {
     };
     console.log('onEachFeature');
     (function(layer, properties) {
-      debugger;
       console.log('properties', properties);
       // Create a mouseover event
       layer.on("mouseover", function (e) {
+        debugger;
         // Change the style to the highlighted version
         layer.setStyle(highlightStyle);
         // Create a popup with a unique ID linked to this record
