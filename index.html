@@ -35,7 +35,8 @@ map.addLayer(googleLayer);
 */
 $.getJSON('geodata/tracts2010.json', function(data) {
   // console.log(data);
-  var tracts2010 = topojson.feature(data, data.objects.tracts2010);
+  debugger;
+  var tracts2010 = L.geoJson(topojson.feature(data, data.objects.tracts2010));
   // L.control.layers(data).addTo(map);
   
   var baseLayers = {
