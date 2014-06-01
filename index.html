@@ -42,9 +42,9 @@ map.on('moveend', function() {
       for (var i = 0; i < data.length; i++) {
         var location = [data[i].location.latitude, data[i].location.longitude];
         var popup = '';
-        for (var k in data) {
+        for (var k in data[i]) {
           if (data.hasOwnProperty(k)) {
-            popup += k + ': ' + data[k] + '<br/>';
+            popup += k + ': ' + data[i][k] + '<br/>';
           }
         }
         var marker = L.marker(location).addTo(map).bindPopup(popup);
