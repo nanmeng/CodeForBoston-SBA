@@ -182,6 +182,8 @@ $('#location').on('keyup', function(e) {
     dataType: 'json',
     success: function(data) {
       debugger;
+      var locaciton = data.results.locations.latLng;
+      map.setView([location.lat, location.lng]);
       // shift away the header
     }
   });
