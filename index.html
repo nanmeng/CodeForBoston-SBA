@@ -74,7 +74,7 @@ $.getJSON('geodata/tracts2010.json', function(data) {
         });
         // Insert a headline into that popup
         var hed = $("<div></div>", {
-            text: "Tract ID: " + tract_id + " value: " + census_data[tract_id],
+            text: "Tract ID: " + tract_id + ' ' + $("#filters option:selected").text() + ' ' + census_data[tract_id],
             css: {fontSize: "16px", marginBottom: "3px"}
         }).appendTo(popup);
         // Add the popup to the map
@@ -113,7 +113,7 @@ var census_data = {};
 $('#filters').on('change', function(e) {
   debugger;
   var census_var = this.value;
-  console.log(this.value);
+  // console.log(this.value);
   $.ajax({
     url: 'http://api.census.gov/data/2012/acs5',
     data: {
@@ -129,7 +129,7 @@ $('#filters').on('change', function(e) {
       data.shift();
       for (var i = 0; i < data.length; i++) {
         var tract_id = '' + data[i][1] + data[i][2] + data[i][3];
-        console.log('tract_id', tract_id);
+        // console.log('tract_id', tract_id);
         census_data[tract_id] = data[i][0];
       }
     }
