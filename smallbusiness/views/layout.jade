@@ -1,0 +1,16 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport' content='width=device-width, initial-scale=1.0')
+		title= title
+		link(rel='stylesheet', href='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='/javascripts/jquery-2.1.1.min.js')
+		script(src='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js')
+		script(src='http://d3js.org/topojson.v1.min.js')
+		script(src='/javascripts/main.js')
+	body
+		block content
+		script(src='/javascripts/bootstrap.min.js')
