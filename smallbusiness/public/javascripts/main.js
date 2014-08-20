@@ -1,4 +1,16 @@
 $(function () {
+	app = angular.module('B', []);
+	app.controller('rangeAgeController', function($scope) {
+		this.range = {
+			min: 18,
+			max: 60
+		};
+	});
+	app.controller('dndController', function($scope) {
+		$scope.list1 = {title: 'foo'};
+		$scope.list2 = {};
+	});
+
 	var mapQuest = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
 		attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 		subdomains: '1234'
@@ -75,16 +87,38 @@ $(function () {
 			layers: [mapQuest, tracts2010]
 		});
 		L.control.scale().addTo(map);
-		map.on('moveend', function () {
+		map.on('moveend load', function () {
+			function constructYelpURL(category_filter) {
+				var URL = "http://api.yelp.com/" +
+					"business_review_search?"+
+					"callback=" + "handleResults" +
+					"&term=" + document.getElementById("term").value + 
+					"&num_biz_requested=10" +
+					"&tl_lat=" + mapBounds.getSouthWest().lat() +
+					"&tl_long=" + mapBounds.getSouthWest().lng() + 
+					"&br_lat=" + mapBounds.getNorthEast().lat() + 
+					"&br_long=" + mapBounds.getNorthEast().lng() +
+					"&ywsid=" + YWSID;
+			}
+			console.log(arguments);
 			var map_center = map.getCenter();
 			var data_id = $('#business').val();
+			var category_filter = $('#yelp-business').val();
 			$.ajax({
+				url: 'http://api.yelp.com/v2/search',
+				data: {
+					category_filter: category_filter
+				},
+				/*
 				url: 'http://data.cityofboston.gov/resource/' + data_id + '.json',
 				data: {
 					'$where': 'within_circle(location,' + map_center.lat + ',' + map_center.lng + ',2000)'
 				},
+				*/
 				dataType: 'json',
 				success: function (data) {
+					console.log(data);
+					/*
 					for (var i = 0; i < data.length; i++) {
 						var location = [data[i].location.latitude, data[i].location.longitude];
 						var popup = '';
@@ -96,6 +130,7 @@ $(function () {
 						}
 						var marker = L.marker(location).addTo(map).bindPopup(popup);
 					}
+					*/
 				}
 			});
 		});
@@ -137,6 +172,15 @@ $(function () {
 			}
 		});
 	});
+
+	$('#yelp-business').on('change', function (e) {
+		// debugger;
+		var category_filter = this.value;
+		$.ajax({
+			url: 'http://api.yelp.com/v2/search?category_filter=' + category_filter
+		})
+	})
+
 	$('#business').on('change', function (e) {
 		// debugger;
 		var data_var = this.value;

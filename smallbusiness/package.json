@@ -14,7 +14,8 @@
     "debug": "~0.7.4",
     "jade": "~1.3.0",
     "less-middleware": "1.0.x",
-    "grunt-contrib-less": "0.11.x"
+    "grunt-contrib-less": "0.11.x",
+    "angular-dragdrop": "~1.0.5"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
