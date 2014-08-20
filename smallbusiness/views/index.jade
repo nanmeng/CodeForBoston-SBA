@@ -4,38 +4,48 @@ block content
 	div(
 		class='row'
 	)
-		div(
-			class='navbar navbar-default navbar-fixed-top'
-			role="navigation"
+		div( 
+			class='column'
+			id='leftcolumn'
 		)
 			div(
-				class="container"
-			)
-				div(
-					class="navbar-header"
+				class='navbar navbar-default navbar-fixed-top',
+				role="navigation"
 				)
-					button(
-						type="button",
-						class="navbar-toggle",
-						data-toggle="collapse",
-						data-target=".navbar-collapse"
+					div(
+						class="container"
 					)
-						span(class="sr-only")= 'Toggle navigation'
-						span(class="icon-bar")
-						span(class="icon-bar")
-						span(class="icon-bar")
-					form(
-						class='navbar-form'
-					)
-						input(
-							type='text',
-							id='location',
-							class='span4',
-							placeholder='Type place of interest'
+						div(
+							class="navbar-header"
 						)
-						include toolbar
+							button(
+								type="button",
+								class="navbar-toggle",
+								data-toggle="collapse",
+								data-target=".navbar-collapse"
+							)
+								span(class="sr-only")= 'Toggle navigation'
+								span(class="icon-bar")
+								span(class="icon-bar")
+								span(class="icon-bar")
+							form(
+								class='navbar-form'
+							)
+							input(
+									type='text',
+									id='location',
+									class='span4',
+									placeholder='Type place of interest'
+							)
+							include toolbar
+			div(
+				id='map',
+				class='thumbnail mainmap'
+			)
 		div(
-			id='map',
-			class='thumbnail mainmap'
-		)
-		include info_panel.html
+			class='column'
+			id='rightcolumn'
+		)		
+				div(
+					id='panel'
+				)
