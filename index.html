@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<link rel="stylesheet" type="text/css" href="container.css">
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"></script>
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -13,25 +14,35 @@
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 </head>
 <body>
-<input id="location" class="form-control" style="width:50%" value="" placeholder="Type place of interest">
-<select id="filters" class="form-control" style="width:50%">
-  <option class="form-control" value="B09001_001E">Children</option>
-  <option value="B19326_002E">Median income in the past 12 months</option>
-  <option value="B05006_158E">Born in Northern America</option>
-  <option value="B05006_146E">Born in South America</option>
-  <option value="B05006_099E">Born in Northern Africa</option>
-  <option value="B05006_021E">Born in Southern Europe</option>
-  <option value="B05006_001E">Place of birth for foreign-born population in US-Total</option>
-  <option value="B19301_001E">Income per capita</option>
-  <option value="B14007H_018E">Enrolled in Graduate School</option>
-  <option value="B14007H_017E">Enrolled in College</option>
-  <option value="B06002_001E">Median age by place of birth in US</option>
-</select>
-<select id="business">
-  <option value="gb6y-34cq">Active Food Establishment Licenses</option>
-  <option value="e29s-ympv">Boston Public Schools</option>
-</select>
-<div style="width:100%; height:100%" id="map"></div>
+<div style='height:100%; width:100%; position: absolute; background-color:red; top:0px; bottom:0px; left:0px; right:0px;' id ='whole-page'> 
+    <div id="content-container" style="width: 70%">
+      <div id='top-controls'>
+        <input id="location" class="form-control" style="width:50%" value="" placeholder="Type place of interest">
+        <select id="filters" class="form-control" style="width:50%">
+          <option class="form-control" value="B09001_001E">Children</option>
+          <option value="B19326_002E">Median income in the past 12 months</option>
+          <option value="B05006_158E">Born in Northern America</option>
+          <option value="B05006_146E">Born in South America</option>
+          <option value="B05006_099E">Born in Northern Africa</option>
+          <option value="B05006_021E">Born in Southern Europe</option>
+          <option value="B05006_001E">Place of birth for foreign-born population in US-Total</option>
+          <option value="B19301_001E">Income per capita</option>
+          <option value="B14007H_018E">Enrolled in Graduate School</option>
+          <option value="B14007H_017E">Enrolled in College</option>
+          <option value="B06002_001E">Median age by place of birth in US</option>
+        </select>
+        <select id="business">
+         <option value="gb6y-34cq">Active Food Establishment Licenses</option>
+         <option value="e29s-ympv">Boston Public Schools</option>
+        </select>
+      </div>
+      <div style='width:100%; height:100%;' id="map"></div>
+    </div>
+    <div style="background-color:blue" id="sidebar">
+        <h3>Population</h3>
+        <h3>Money</h3>
+    </div>
+</div>
 <script type='text/javascript'>
 var select_filter = '';
 var map = new L.Map('map').setView([42.3334, -71.0270], 13);
