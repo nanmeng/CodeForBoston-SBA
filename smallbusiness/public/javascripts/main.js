@@ -189,7 +189,37 @@ $(function () {
 		$.ajax({
 			url: 'http://data.cityofboston.gov/resource/'
 		})
-	})
+	});
+	$("#location").autocomplete({
+      source: function( request, response ) {
+		  console.log(request);
+		  console.log(response);
+        $.ajax({
+          url: "http://api.censusreporter.org/1.0/geo/search",
+          dataType: "jsonp",
+          data: {
+			q: request.term
+          },
+          success: function( data ) {
+			console.log(data);
+            // response( data );
+          }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.label :
+          "Nothing selected, input was " + this.value);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+	/*
 	$('#location').on('keyup', function (e) {
 		if (e.which === 13) {
 			$.ajax({
@@ -205,4 +235,5 @@ $(function () {
 			});
 		}
 	});
+	*/
 });
