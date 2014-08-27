@@ -192,25 +192,59 @@ $(function () {
 	});
 	$("#location").autocomplete({
       source: function( request, response ) {
-		  console.log(request);
-		  console.log(response);
+		  console.log(request, 'request');
+		  console.log(response, 'response');
         $.ajax({
           url: "http://api.censusreporter.org/1.0/geo/search",
-          dataType: "jsonp",
+          dataType: "json",
           data: {
 			q: request.term
           },
           success: function( data ) {
-			console.log(data);
+			response($.map(data.results, function (item, i) {
+			console.log(i, 'i');
+			console.log(item, 'item');
+				return {
+					'id': item.full_geoid,
+					'label': item.full_name,
+					'value': item.full_geoid
+				};
+			}));
             // response( data );
           }
         });
       },
       minLength: 3,
       select: function( event, ui ) {
-        log( ui.item ?
-          "Selected: " + ui.item.label :
-          "Nothing selected, input was " + this.value);
+		console.log( ui.item ?
+		"Selected: " + ui.item.label + ' value: ' + ui.item.value :
+		"Nothing selected, input was " + this.value);
+        $.ajax({
+          url: 'http://api.censusreporter.org/1.0/geo/tiger2012/' + ui.item.value,
+          dataType: 'json',
+          data: {
+			geom: true
+          },
+          success: function( data ) {
+			console.log(data);
+			var geoJson = {
+				type: 'FeatureCollection',
+				features: [
+					data
+				]
+			};
+			// L.geoJson(data, {
+			L.geoJson(geoJson, {
+				style: function (feature) {
+					return {color: feature.properties.color};
+				},
+				onEachFeature: function (feature, layer) {
+					// layer.bindPopup(feature.properties.description);
+				}
+			}).addTo(map);
+
+          }
+        });
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
