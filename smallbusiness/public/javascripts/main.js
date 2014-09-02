@@ -18,6 +18,7 @@ $(function () {
 		subdomains: '1234'
 			// }).addTo(map);
 	});
+	var map;
 	$.getJSON('geodata/tracts2010.json', function (data) {
 		var onEachFeature = function (feature, layer) {
 			var defaultStyle = {
@@ -83,12 +84,13 @@ $(function () {
 			onEachFeature: onEachFeature
 		});
 		// L.control.layers(data).addTo(map);
-		var map = new L.Map('map', {
+		map = new L.Map('map', {
 			center: [42.3557, -71.0650],
 			zoom: 13,
 			layers: [mapQuest, tracts2010]
 		});
 		L.control.scale().addTo(map);
+		console.log(map, '-----------');
 		map.on('moveend load', function () {
 			function constructYelpURL(category_filter) {
 				var URL = "http://api.yelp.com/" +
@@ -146,7 +148,6 @@ $(function () {
 		};
 
 		L.control.layers(baseLayers, overlays).addTo(map);
-		// L.GeoJSON(
 	});
 	var census_data = {};
 	$('#filters').on('change', function (e) {
@@ -234,6 +235,10 @@ $(function () {
 				]
 			};
 			// L.geoJson(data, {
+			// NOTE: Carrie please fix this part
+			var fooLayer = L.geoJson().addTo(map);
+			fooLayer.addData(geoJson);
+			/*
 			L.geoJson(geoJson, {
 				style: function (feature) {
 					return {color: feature.properties.color};
@@ -242,6 +247,7 @@ $(function () {
 					// layer.bindPopup(feature.properties.description);
 				}
 			}).addTo(map);
+			*/
 
           }
         });
