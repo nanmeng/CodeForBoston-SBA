@@ -19,8 +19,8 @@ $ git checkout -b NAME
 Install node:
 http://nodejs.org/download/
 
-Navigate to the file directory of /CodeForBoston-SBA/smallbusiness:
-$ cd /CodeForBoston-SBA/smallbusiness
+Navigate to the file directory of /CodeForBoston-SBA/:
+$ cd /CodeForBoston-SBA/
 
 Use Node to install:
 $ npm install
