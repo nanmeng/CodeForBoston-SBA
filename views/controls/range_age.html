@@ -1,0 +1,8 @@
+<div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;'>
+	<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title">{{list2.title}}</div>
+</div>
+<div class="btn btn-primary" data-drag="true" ng-model="list1" jqyoui-draggable="{animate:true}" ng-controller="rangeAgeController as c">
+	<input type="text" id="rage_age_min" ng-model="c.range.min">
+	-
+	<input type="text" id="rage_age_max" ng-model="c.range.max">
+</div>
