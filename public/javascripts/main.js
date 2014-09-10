@@ -259,9 +259,8 @@ $(function () {
 			url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=' + tableId + '&geo_ids=' + geoId,
 			dataType: 'json',
 			success: function( data ) {
-				var tableHtml = "";
+				var tableHtml = "<div id='chart'></div>";
 				var cols = data.tables[tableId].columns;
-				var dataPoints = [];
 				var total;
 				var estimate = data.data[geoId][tableId].estimate;
 				var aggregated = [
@@ -333,12 +332,8 @@ $(function () {
 					tableHtml += ":&nbsp;";
 					tableHtml += count;
 					tableHtml += "<br />";
-					dataPoints.push({
-						title:name,
-						count:count
-					});
 				}
-				$("#data").html( tableHtml );
+				$("#sidebar").html( tableHtml );
 				d3.select("#chart")
 					.selectAll("div")
 					.data(aggregated)
