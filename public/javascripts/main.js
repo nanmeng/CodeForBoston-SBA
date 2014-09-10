@@ -222,8 +222,9 @@ $(function () {
 		console.log( ui.item ?
 		"Selected: " + ui.item.label + ' value: ' + ui.item.value :
 		"Nothing selected, input was " + this.value);
+		var geoId = ui.item.value;
         $.ajax({
-          url: 'http://api.censusreporter.org/1.0/geo/tiger2012/' + ui.item.value,
+          url: 'http://api.censusreporter.org/1.0/geo/tiger2012/' + geoId,
           dataType: 'json',
           data: {
 			geom: true
@@ -253,6 +254,42 @@ $(function () {
 
           }
         });
+		var tableId = 'B01001';
+		$.ajax({
+			url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=' + tableId + '&geo_ids=' + geoId,
+			dataType: 'json',
+			success: function( data ) {
+				var tableHtml = "";
+				var cols = data.tables[tableId].columns;
+				var dataPoints = [];
+				var total;
+				for ( column in cols ) {
+					for ( var i = 0; i < cols[column].indent; i++ ) {
+						tableHtml += "&nbsp;&nbsp;&nbsp;";
+					}
+					var name = cols[column].name;
+					var count = data.data[geoId][tableId].estimate[column];
+					if ( name.substr(0,5).toLowerCase() === 'total' ) {
+						total = count;
+					}
+					tableHtml += name;
+					tableHtml += ":&nbsp;";
+					tableHtml += count;
+					tableHtml += "<br />";
+					dataPoints.push({
+						title:name,
+						count:count
+					});
+				}
+				$("#data").html( tableHtml );
+				d3.select("#chart")
+					.selectAll("div")
+					.data(dataPoints)
+					.enter().append("div")
+					.style("width", function(d) { return 175 * d.count / total + "%"; })
+					.text(function(d) { return d.title; });
+			}
+		});
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
