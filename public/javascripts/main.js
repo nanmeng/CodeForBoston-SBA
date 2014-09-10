@@ -10,6 +10,8 @@ $(function () {
 		$scope.list1 = {title: 'foo'};
 		$scope.list2 = {};
 	});
+	app.controller('appCtrl', function($scope) {
+	});
 
 	console.log('hello');
 	console.log('hi again');
