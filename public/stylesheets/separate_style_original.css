@@ -1,0 +1,92 @@
+/**/
+
+
+
+body {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#top-controls {
+	background-color: red;
+	height: 100px;
+}
+
+
+#content-container {
+   
+    width: 100%;
+    margin: 0;
+
+
+}
+#sidebar {
+    
+    background-color:blue;
+    color: white;
+    height: 100%;
+
+}
+
+#location {
+	width:50%;
+}
+
+#map {
+	width:100%; 
+	height: 50%;
+	
+}
+
+.button_group {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+.btn {
+	width: 32%;
+	/*margin: 0;
+	padding: 0;*/
+}
+@media screen and (min-width: 700px){
+
+
+	#content-container {
+		width: 66%;
+		height: 100%;
+		float: left;
+		
+	}
+
+	#top-controls {
+		height: 30%;
+		min-height: 100px;
+	}
+
+	#map {
+		height: 70%;
+	}
+
+
+	
+
+	#sidebar {
+		background-color: blue;
+		height: 100%;
+	}
+	
+	#whole-page {
+		width: 100%;
+		
+
+	}
+
+
+	
+
+	
+	
+	
+}
+
