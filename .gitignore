@@ -1,6 +1,7 @@
 # Vim
 *.swp
 *.swn
+*.swm
 
 # https://github.com/github/gitignore/blob/master/Node.gitignore
 # Logs
