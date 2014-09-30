@@ -333,7 +333,7 @@ $(function () {
 					tableHtml += count;
 					tableHtml += "<br />";
 				}
-				$("#sidebar").html( tableHtml );
+				$("#rightsidebar").html( tableHtml );
 				d3.select("#chart")
 					.selectAll("div")
 					.data(aggregated)
