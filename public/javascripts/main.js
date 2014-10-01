@@ -205,20 +205,19 @@ $(function () {
           },
           success: function( data ) {
 			response($.map(data.results, function (item, i) {
-			console.log(i, 'i');
-			console.log(item, 'item');
 				return {
 					'id': item.full_geoid,
 					'label': item.full_name,
 					'value': item.full_geoid
 				};
 			}));
-            // response( data );
           }
         });
       },
       minLength: 3,
       select: function( event, ui ) {
+		event.preventDefault();
+		$("#location").val(ui.item.label);
 		console.log( ui.item ?
 		"Selected: " + ui.item.label + ' value: ' + ui.item.value :
 		"Nothing selected, input was " + this.value);
@@ -241,6 +240,7 @@ $(function () {
 			// NOTE: Carrie please fix this part
 			var fooLayer = L.geoJson().addTo(map);
 			fooLayer.addData(geoJson);
+			map.fitBounds(fooLayer);
 			/*
 			L.geoJson(geoJson, {
 				style: function (feature) {
