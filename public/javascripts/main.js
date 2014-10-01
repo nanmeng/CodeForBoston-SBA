@@ -18,7 +18,6 @@ $(function () {
 	var mapQuest = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
 		attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
 		subdomains: '1234'
-			// }).addTo(map);
 	});
 	var map;
 	$.getJSON('geodata/tracts2010.json', function (data) {
@@ -37,12 +36,9 @@ $(function () {
 				fillOpacity: 0.65,
 				fillColor: '#2262CC'
 			};
-			// console.log('onEachFeature');
 			(function (layer, properties) {
-				// console.log('properties', properties);
 				// Create a mouseover event
 				layer.on("mouseover", function (e) {
-					// debugger;
 					var tract_id = e.target.feature.id;
 					// Change the style to the highlighted version
 					layer.setStyle(highlightStyle);
@@ -85,7 +81,6 @@ $(function () {
 		var tracts2010 = L.geoJson(topojson.feature(data, data.objects.tracts2010), {
 			onEachFeature: onEachFeature
 		});
-		// L.control.layers(data).addTo(map);
 		map = new L.Map('map', {
 			center: [42.3557, -71.0650],
 			zoom: 13,
@@ -153,9 +148,7 @@ $(function () {
 	});
 	var census_data = {};
 	$('#filters').on('change', function (e) {
-		// debugger;
 		var census_var = this.value;
-		// console.log(this.value);
 		$.ajax({
 			url: 'http://api.census.gov/data/2012/acs5',
 			data: {
@@ -166,12 +159,10 @@ $(function () {
 			},
 			dataType: 'json',
 			success: function (data) {
-				// debugger;
 				// shift away the header
 				data.shift();
 				for (var i = 0; i < data.length; i++) {
 					var tract_id = '' + data[i][1] + data[i][2] + data[i][3];
-					// console.log('tract_id', tract_id);
 					census_data[tract_id] = data[i][0];
 				}
 			}
@@ -179,7 +170,6 @@ $(function () {
 	});
 
 	$('#yelp-business').on('change', function (e) {
-		// debugger;
 		var category_filter = this.value;
 		$.ajax({
 			url: 'http://api.yelp.com/v2/search?category_filter=' + category_filter
@@ -187,7 +177,6 @@ $(function () {
 	})
 
 	$('#business').on('change', function (e) {
-		// debugger;
 		var data_var = this.value;
 		$.ajax({
 			url: 'http://data.cityofboston.gov/resource/'
@@ -195,8 +184,6 @@ $(function () {
 	});
 	$("#location").autocomplete({
       source: function( request, response ) {
-		  console.log(request, 'request');
-		  console.log(response, 'response');
         $.ajax({
           url: "http://api.censusreporter.org/1.0/geo/search",
           dataType: "json",
@@ -218,9 +205,6 @@ $(function () {
       select: function( event, ui ) {
 		event.preventDefault();
 		$("#location").val(ui.item.label);
-		console.log( ui.item ?
-		"Selected: " + ui.item.label + ' value: ' + ui.item.value :
-		"Nothing selected, input was " + this.value);
 		var geoId = ui.item.value;
         $.ajax({
           url: 'http://api.censusreporter.org/1.0/geo/tiger2012/' + geoId,
@@ -236,22 +220,9 @@ $(function () {
 					data
 				]
 			};
-			// L.geoJson(data, {
-			// NOTE: Carrie please fix this part
 			var fooLayer = L.geoJson().addTo(map);
 			fooLayer.addData(geoJson);
 			map.fitBounds(fooLayer);
-			/*
-			L.geoJson(geoJson, {
-				style: function (feature) {
-					return {color: feature.properties.color};
-				},
-				onEachFeature: function (feature, layer) {
-					// layer.bindPopup(feature.properties.description);
-				}
-			}).addTo(map);
-			*/
-
           }
         });
 		var tableId = 'B01001';
@@ -354,21 +325,4 @@ $(function () {
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
     });
-	/*
-	$('#location').on('keyup', function (e) {
-		if (e.which === 13) {
-			$.ajax({
-				url: 'http://www.mapquestapi.com/geocoding/v1/address',
-				data: 'key=Fmjtd%7Cluur2g62nq%2C8x%3Do5-9a85q4&location=' + $('#location').val(),
-				dataType: 'json',
-				success: function (data) {
-					// debugger;
-					var location = data.results[0].locations[0].latLng;
-					map.setView([location.lat, location.lng]);
-					// shift away the header
-				}
-			});
-		}
-	});
-	*/
 });
