@@ -1,5 +1,5 @@
 doctype html
-html(lang='en' ng-app="B")
+html(lang='en' ng-app="sbaApp")
 	head
 		meta(charset='utf-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1.0')
@@ -14,8 +14,13 @@ html(lang='en' ng-app="B")
 		script(src='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js')
 		script(src='http://d3js.org/topojson.v1.min.js')
 		script(src='http://d3js.org/d3.v3.min.js')
-		script(src='/javascripts/main.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js')
+		script(src='/javascripts/angular-leaflet-directive.min.js')
+		script(src='/javascripts/angucomplete.js')
+		script(src='/javascripts/angular-cache.js')
+		script(src='/javascripts/sbaApp.js')
+		script(src='/javascripts/census/ageAggregator.js')
+		script(src='/javascripts/census/demographics.js')
 		script(src='/javascripts/bootstrap.min.js')
 	body
 		block content

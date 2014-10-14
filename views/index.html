@@ -1,12 +1,21 @@
       
-        <div class="container-fluid">
+        <div class="container-fluid" ng-controller="SbaController">
           <div class="row" id="master-row">
             <div id="leftpanel" class="col-md-8">
               <div class="row">
                 <div class="col-md-12">
                 <h1 class="page-header">City Title</h1>
                 <div class="form-group">
-                <input id="location" class="form-control" placeholder="Type place of interest">
+                <div>
+                    <angucomplete id="location"
+						 placeholder="Type place of interest" pause="300"
+						 selectedobject="selectedLocation"
+						 url="http://api.censusreporter.org/1.0/geo/search?q="
+						 datafield="results"
+						 titlefield="full_name"
+						 minlength="3"
+						 inputclass="form-control"/>
+					</div>
 
         </div>
                 <div class="btn-group-justified" id="main-filter-bar">
@@ -51,8 +60,10 @@
     </ul>
   </div>
 </div>
-                  
-                  <div id="map" class="col-md-12"></div>
+					<leaflet center="mapCenter"
+						width="640"
+						height="480"
+						geoJSON="geoJson" />
                 </div>
                 
               </div>  
@@ -61,6 +72,12 @@
               <div class="row">
                 <div class="right-sidebar-1">
                   <h1 class="h1">Sex and Age</h1>
+		      <div ng-repeat="dataPoint in demographics.ageRanges"
+					   ng-style="{ 'width' : ( 100 * dataPoint.total / demographics.max + '%' ), 
+								   'border' : '1px dotted black', 
+								   'background' : 'linear-gradient(to right, pink ' + 100 * dataPoint.female / dataPoint.total + '%, lightblue ' + 100 * dataPoint.female / dataPoint.total + '%)'}">
+					  {{ dataPoint.name }}: {{ dataPoint.total }}
+		      </div>
                 </div>
                 <div class="right-sidebar-2">
                    <h1 class="h1">Race</h1>
@@ -73,9 +90,7 @@
                 </div>
 
               </div>
-            </div> 
-
-            
+            </div>
           </div>
         </div>   
 
