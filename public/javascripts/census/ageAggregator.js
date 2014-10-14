@@ -2,7 +2,7 @@ angular.module('census.aggregate', [])
 	.factory('ageAggregator', function() {
 		return {
 			aggregate: function(estimate) {
-				return [
+				var max, i, ageRanges = [
 							{
 								name: '0-9',
 								male: estimate['B01001003'] + estimate['B01001004'],
@@ -58,6 +58,15 @@ angular.module('census.aggregate', [])
 								total: estimate['B01001024'] + estimate['B01001025'] + estimate['B01001048'] + estimate['B01001049']
 							}
 						];
+						for (i = 0; i < ageRanges.length; i++) {
+							if (!max || max < ageRanges[i].total) {
+								max = ageRanges[i].total;
+							}
+						}
+						return {
+							ageRanges: ageRanges,
+							max: max
+						};
 					}
 				};
 			});

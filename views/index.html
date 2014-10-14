@@ -72,8 +72,10 @@
               <div class="row">
                 <div class="right-sidebar-1">
                   <h1 class="h1">Sex and Age</h1>
-		      <div ng-repeat="dataPoint in demographics"
-					   ng-style="{ 'width' : ( dataPoint.total / 500 + '%' ), 'border' : '1px dotted black' }">
+		      <div ng-repeat="dataPoint in demographics.ageRanges"
+					   ng-style="{ 'width' : ( 100 * dataPoint.total / demographics.max + '%' ), 
+								   'border' : '1px dotted black', 
+								   'background' : 'linear-gradient(to right, pink ' + 100 * dataPoint.female / dataPoint.total + '%, lightblue ' + 100 * dataPoint.female / dataPoint.total + '%)'}">
 					  {{ dataPoint.name }}: {{ dataPoint.total }}
 		      </div>
                 </div>
