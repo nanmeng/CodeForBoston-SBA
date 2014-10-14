@@ -1,4 +1,11 @@
-var app = angular.module('sbaApp', ['leaflet-directive', 'angucomplete', 'census']);
+var app = angular.module('sbaApp', ['leaflet-directive', 'angucomplete', 'census', 'angular-data.DSCacheFactory']);
+app.run(function ($http, DSCacheFactory) {
+    DSCacheFactory('defaultCache', {
+        storage: 'localStorage'
+    });
+    $http.defaults.cache = DSCacheFactory.get('defaultCache');
+});
+
 app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics', function($scope, $http, leafletData, demographics) {
 	var defaultStyle = {
 		weight: 1.5,
