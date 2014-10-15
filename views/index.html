@@ -16,6 +16,8 @@
 						 minlength="3"
 						 inputclass="form-control"/>
 					</div>
+          <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in lookupLocation($viewValue)" typeahead-loading="loadingLocations" class="form-control">
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
         </div>
                 <div class="btn-group-justified" id="main-filter-bar">

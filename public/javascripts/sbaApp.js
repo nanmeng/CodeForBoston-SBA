@@ -19,7 +19,17 @@ app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics
 			lng: -71.0636,
 			zoom: 12
 		},
-		selectedLocation: {}
+		selectedLocation: {},
+		lookupLocation: function(value){
+			return $http.get('http://api.censusreporter.org/1.0/geo/search' , {
+				params: {
+					q: value,
+				}
+			}).then(function(data, status){
+				return data;
+			});
+
+		}
 	});
 	function getGeoJson(geoId, getChildren) {
 		$http.get('http://api.censusreporter.org/1.0/geo/show/tiger2012?geo_ids=140|' + geoId).success(function(data, status) {
