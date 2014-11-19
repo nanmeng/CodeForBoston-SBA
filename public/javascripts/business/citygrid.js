@@ -1,6 +1,6 @@
 angular.module('business', [])
 	.factory('citygrid', ['$http', '$q', function($http, $q) {
-			var baseUrl = 'http://api.citygridmedia.com/content/places/v2/search/latlon';
+			var baseUrl = '/biz';
 			return {
 				getBusinesses: function( bounds, category ) {
 					var deferred = $q.defer();
@@ -9,11 +9,11 @@ angular.module('business', [])
 						method: "GET",
 						params: {
 							lat: bounds.northEast.lat,
-							lon: bounds.northEast.lng,
+							lon: bounds.southWest.lng,
 							lat2: bounds.southWest.lat,
-							lon2: bounds.southWest.lng,
+							lon2: bounds.northEast.lng,
 							what: category,
-							publisher: 'citysearch',
+							publisher: 'test',
 							format: 'json'
 						}}).success( function (data, status)  {
 						console.log(data);

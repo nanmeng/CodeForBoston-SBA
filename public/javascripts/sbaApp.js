@@ -1,4 +1,4 @@
-var app = angular.module('sbaApp', ['leaflet-directive', 'angucomplete', 'census', 'angular-data.DSCacheFactory', 'ui.bootstrap', 'business']);
+var app = angular.module('sbaApp', ['leaflet-directive', 'angucomplete', 'census', 'angular-data.DSCacheFactory', 'business']);
 app.run(function ($http, DSCacheFactory) {
     DSCacheFactory('defaultCache', {
         storage: 'localStorage'
@@ -47,9 +47,9 @@ app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics
 			layer.addData(data);
 			leafletData.getMap().then(function(map) {
 				map.fitBounds(layer);
-				citygrid.getBusinesses($scope.bounds, 'movies').then(function(data) {
+				citygrid.getBusinesses($scope.bounds, 'food').then(function(data) {
 					$scope.businesses = data;
-				})
+				});
 			});
 		});
 		demographics.getDemographics(geoId).then(function(data) {
