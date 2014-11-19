@@ -1,4 +1,4 @@
-var app = angular.module('sbaApp', ['leaflet-directive', 'angucomplete', 'census', 'angular-data.DSCacheFactory']);
+var app = angular.module('sbaApp', ['leaflet-directive', 'angucomplete', 'census', 'angular-data.DSCacheFactory', 'ui.bootstrap', 'business']);
 app.run(function ($http, DSCacheFactory) {
     DSCacheFactory('defaultCache', {
         storage: 'localStorage'
@@ -6,7 +6,8 @@ app.run(function ($http, DSCacheFactory) {
     $http.defaults.cache = DSCacheFactory.get('defaultCache');
 });
 
-app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics', function($scope, $http, leafletData, demographics) {
+app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics', 'citygrid', 
+	function($scope, $http, leafletData, demographics, citygrid) {
 	var defaultStyle = {
 		weight: 1.5,
 		color: '#55A',
@@ -19,7 +20,20 @@ app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics
 			lng: -71.0636,
 			zoom: 12
 		},
-		selectedLocation: {}
+		bounds: {},
+		selectedLocation: {},
+		asyncSelected: {},
+		businesses: {},
+		lookupLocation: function(value){
+			return $http.get('http://api.censusreporter.org/1.0/geo/search' , {
+				params: {
+					q: value,
+				}
+			}).then(function(data, status){
+				return data.data.results;
+			});
+
+		}
 	});
 	function getGeoJson(geoId, getChildren) {
 		$http.get('http://api.censusreporter.org/1.0/geo/show/tiger2012?geo_ids=140|' + geoId).success(function(data, status) {
@@ -33,6 +47,9 @@ app.controller('SbaController', ['$scope', '$http', 'leafletData', 'demographics
 			layer.addData(data);
 			leafletData.getMap().then(function(map) {
 				map.fitBounds(layer);
+				citygrid.getBusinesses($scope.bounds, 'movies').then(function(data) {
+					$scope.businesses = data;
+				})
 			});
 		});
 		demographics.getDemographics(geoId).then(function(data) {

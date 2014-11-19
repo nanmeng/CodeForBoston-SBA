@@ -16,6 +16,12 @@
 						 minlength="3"
 						 inputclass="form-control"/>
 					</div>
+          <input type="search" ng-model="asyncSelected" 
+				 placeholder="Locations loaded via $http" 
+				 typeahead="full_name for full_name in lookupLocation($viewValue)" 
+				 typeahead-loading="loadingLocations"
+				 class="form-control">
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 
         </div>
                 <div class="btn-group-justified" id="main-filter-bar">
@@ -63,7 +69,9 @@
 					<leaflet center="mapCenter"
 						width="640"
 						height="480"
-						geoJSON="geoJson" />
+						geoJSON="geoJson"
+						bounds="bounds"
+						markers="businesses"/>
                 </div>
                 
               </div>  
